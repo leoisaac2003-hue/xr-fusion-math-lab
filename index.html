@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XR FUSION MATH LAB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Figtree:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<script type="importmap">
+{"imports":{
+ "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+ "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<header class="top">
+  <h1>XR FUSION <span>MATH LAB</span></h1>
+  <p>De la figura plana al sólido: extrusión y revolución en 3D</p>
+</header>
+
+<main class="app">
+  <aside class="panel" aria-label="Catálogo de figuras">
+    <h2>Catálogo</h2>
+    <div id="catalog" class="catalog"></div>
+    <div class="note">
+      <strong>Gestos con la mano</strong>
+      <ul>
+        <li>Palma abierta en movimiento: rota el sólido</li>
+        <li>Índice levantado: apunta y mantén sobre un botón para elegirlo</li>
+        <li>Pinza pulgar + índice: mueve la mano a los lados para avanzar la transformación</li>
+        <li>Dos manos: sepáralas o júntalas para hacer zoom</li>
+        <li>Puño: restablece la vista</li>
+      </ul>
+      <p><strong>MediaPipe solo reconoce los gestos.</strong> El cálculo geométrico y el dibujo 3D los hace esta aplicación.</p>
+    </div>
+  </aside>
+
+  <section class="center">
+    <div id="stage" class="stage">
+      <video id="cam" class="cam-video" playsinline muted></video>
+      <canvas id="gl"></canvas>
+      <canvas id="fig2d" width="240" height="190" aria-label="Figura 2D original"></canvas>
+      <div id="badge" class="badge"></div>
+      <div id="status" class="status">Cámara apagada</div>
+    </div>
+    <div class="controls">
+      <button id="play" data-sel>Animar</button>
+      <button id="reset" data-sel>Reiniciar</button>
+      <label class="grow">Avance <input id="t" type="range" min="0" max="1" step="0.001" value="0"><output id="tOut">0%</output></label>
+      <label>Radio r <input id="r" type="range" min="0.5" max="3" step="0.1" value="1.5"><output id="rOut"></output></label>
+      <label>Altura h <input id="h" type="range" min="0.5" max="5" step="0.1" value="3"><output id="hOut"></output></label>
+      <button id="camBtn" data-sel>Activar cámara y gestos</button>
+      <label class="check"><input id="overlay" type="checkbox"> Superposición sobre cámara</label>
+    </div>
+    <p class="hint">La superposición es una demostración educativa tipo RA: el sólido se dibuja encima de la imagen de la cámara, sin anclaje espacial a objetos reales. Arrastra con el mouse para rotar y usa la rueda para el zoom.</p>
+  </section>
+
+  <aside class="panel sheet" aria-label="Ficha matemática">
+    <h2 id="title"></h2>
+    <span id="type" class="chip"></span>
+    <p id="eq" class="eq"></p>
+    <h3>Fórmulas</h3>
+    <p id="formulas" class="formulas"></p>
+    <h3>Valores en tiempo real</h3>
+    <table id="values"></table>
+    <h3>Interpretación</h3>
+    <p id="explain"></p>
+    <h3>Pasos de construcción</h3>
+    <ol id="steps"></ol>
+  </aside>
+</main>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
